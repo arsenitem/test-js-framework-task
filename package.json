@@ -9,7 +9,7 @@
     "example": "npx http-server . -p 5000"
   },
   "author": "arsenitem",
-  "license": "ISC",
+  "license": "MIT",
   "description": "test task",
   "devDependencies": {
     "@antfu/eslint-config": "^3.8.0",
