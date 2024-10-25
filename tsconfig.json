@@ -1,0 +1,23 @@
+{
+	"compilerOptions": {
+
+		"module": "ESNext",
+    "moduleResolution": "Node",
+		"resolveJsonModule": true,
+		"allowJs": true,
+		"esModuleInterop": true,
+		"isolatedModules": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "outDir": "lib",
+    "sourceMap": true,
+    "strict": true,
+    "target": "ESNext",
+		"paths": {
+			"~/*": ["./src/*"]
+		}
+	},
+  "include": [
+    "src/"
+  ]
+}

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MiniFramework Test</title>
+  <script src="./lib/index.js" type="module"></script>
+  <style>
+    #configEditor {
+      height: 500px;
+      width: 500px;
+    }
+
+    #renderBtn {
+      width: 200px;
+      font-size: 18px;
+    }
+
+    .flex {
+      display: flex;
+      gap: 8px;
+    }
+
+    .flex-col {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    div {
+      min-width: 100px;
+      min-height: 100px;
+      border: 1px solid black;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="flex">
+    <div class="flex-col">
+      <textarea id="configEditor"></textarea>
+      <button id="updateBtn">update</button>
+
+      <button id="config1">preset 1</button>
+      <button id="config2">preset 2</button>
+      <button id="config3">preset 3</button>
+    </div>
+    <div id="app"></div>
+  </div>
+
+
+
+
+  <script lang="js" type="module">
+    import MiniFramework from './lib/index.js';
+    const initialConfig = {
+      tag: 'div',
+      props: {
+        class: 'class1',
+        id: 'wrapper',
+        children: [
+          {
+            tag: 'p',
+            props: {
+              class: 'text',
+              children: [
+                {
+                  tag: 'span',
+                  props: {
+                    class: 'highlight',
+                    children: []
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    };
+
+    const configEditor = document.getElementById('configEditor');
+    configEditor.value = JSON.stringify(initialConfig, null, 2);
+
+    const app = new MiniFramework(initialConfig);
+
+    app.mount('#app')
+
+
+    document.getElementById('updateBtn').addEventListener('click', () => {
+      try {
+        const newConfig = JSON.parse(configEditor.value);
+        app.updateConfig(newConfig);
+      } catch (error) {
+        alert('Invalid JSON');
+      }
+    });
+
+
+    document.getElementById('config1').addEventListener('click', () => {
+      const config1 = {
+        tag: 'div',
+        props: {
+          class: 'container',
+          id: 'main-container',
+          children: [
+            {
+              tag: 'h1',
+              props: {
+                class: 'header',
+                textContent: 'Welcome to Our Site'
+              }
+            },
+            {
+              tag: 'p',
+              props: {
+                class: 'intro-text',
+                textContent: 'This is a sample text for our main container.'
+              }
+            }
+          ]
+        }
+      }
+      configEditor.value = JSON.stringify(config1, null, 2);
+      app.updateConfig(config1);
+    });
+
+    document.getElementById('config2').addEventListener('click', () => {
+      const config2 = {
+        tag: 'ul',
+        props: {
+          class: 'item-list',
+          children: [
+            {
+              tag: 'li',
+              props: {
+                class: 'item',
+                textContent: 'Item 1'
+              }
+            },
+            {
+              tag: 'li',
+              props: {
+                class: 'item',
+                textContent: 'Item 2'
+              }
+            },
+            {
+              tag: 'li',
+              props: {
+                class: 'item',
+                textContent: 'Item 3'
+              }
+            }
+          ]
+        }
+      };
+      configEditor.value = JSON.stringify(config2, null, 2);
+      app.updateConfig(config2);
+    });
+
+    document.getElementById('config3').addEventListener('click', () => {
+
+      const config3 = {
+        tag: 'form',
+        props: {
+          class: 'user-form',
+          children: [
+            {
+              tag: 'input',
+              props: {
+                type: 'text',
+                name: 'username',
+                placeholder: 'Enter your username'
+              }
+            },
+            {
+              tag: 'input',
+              props: {
+                type: 'password',
+                name: 'password',
+                placeholder: 'Enter your password'
+              }
+            },
+            {
+              tag: 'button',
+              props: {
+                type: 'submit',
+                textContent: 'Submit'
+              }
+            }
+          ]
+        }
+      }
+      configEditor.value = JSON.stringify(config3, null, 2);
+      app.updateConfig(config3);
+    });
+  </script>
+</body>
+
+</html>
